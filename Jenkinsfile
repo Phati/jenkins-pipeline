@@ -12,8 +12,8 @@ pipeline{
                 sh 'echo BUILD STAGE'
                 sh 'whoami'
                 //sh " password- ${PASS}"
-                //sh "echo ubuntu | sudo -S chown -R jenkins:jenkins ${env.WORKSPACE}"
-                sh "chmod +x -R ${env.WORKSPACE}"
+                //sh "sudo chown -R jenkins:jenkins ${env.WORKSPACE}"
+                sh "chmod +x -R ${env.WORKSPACE}/spring-boot-app/jenkins/"
                 sh './jenkins/build/mvn.sh mvn clean compile install -DskipTests'
                 sh './jenkins/build/build.sh'
             }
