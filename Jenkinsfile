@@ -32,21 +32,15 @@ pipeline{
 
         stage('Containerize'){
             steps{
-                sh '''
-                echo ****************CONTAINERIZE STAGE****************
-                chmod +x -R ${WORKSPACE}/jenkins/build/build.sh
-                ./jenkins/build/build.sh
-                '''
+                sh "echo ****************CONTAINERIZE STAGE****************"
+                runDockerBuild()
             }
         }
 
         stage('Push'){
              steps{
-                sh '''
-                echo ****************PUSH STAGE****************
-                chmod +x -R ${WORKSPACE}/jenkins/push/push.sh
-                ./jenkins/push/push.sh
-                '''
+                sh "echo ****************PUSH STAGE****************"
+                 runDockerPush()
             }
         }
 
