@@ -8,7 +8,7 @@ pipeline{
                 sh 'echo BUILD STAGE'
                 ./jenkins/build/mvn.sh mvn clean compile install -DskipTests
                 ./jenkins/build/build.sh
-
+            }
         }
 
         stage('Test'){
