@@ -1,12 +1,13 @@
 @Library('java_shared_library') _
+
 pipeline{
-    
+
     agent any
 
     environment {
-        DOCKER_HUB_PASSWORD = credentials('registry-pass') 
+        DOCKER_HUB_PASSWORD = credentials('registry-pass')
     }
-    
+
     stages{
 
         stage('Pipeline Setup') {
@@ -16,13 +17,13 @@ pipeline{
             }
         }
 
-         stage('Unit Tests'){
-             steps{
-                 sh "echo ****************UNIT TESTING STAGE****************"
-                 runJavaUnitTests()
+        stage('Unit Tests'){
+            steps{
+                sh "echo ****************UNIT TESTING STAGE****************"
+                runJavaUnitTests()
             }
         }
-        
+
         stage('Build'){
             steps{
                 sh "echo ****************BUILD STAGE****************"
@@ -38,16 +39,18 @@ pipeline{
         }
 
         stage('Push'){
-             steps{
+            steps{
                 sh "echo ****************PUSH STAGE****************"
-                 runDockerPush()
+                runDockerPush()
             }
         }
 
         stage('Deploy'){
-             steps{
+            steps{
                 sh 'echo ****************DEPLOY STAGE****************'
             }
         }
+
     }
+
 }
