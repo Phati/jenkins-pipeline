@@ -11,16 +11,14 @@ pipeline{
 
         stage('Pipeline Setup') {
             steps {
-                sh "echo ****************PIPELINE SETUP STAGE****************
+                sh "echo ****************PIPELINE SETUP STAGE****************"
                 loadEnv()
             }
         }
 
          stage('Unit Tests'){
              steps{
-                 sh '''
-                    echo ****************UNIT TESTING STAGE****************
-                 '''
+                 sh "echo ****************UNIT TESTING STAGE****************"
                  runJavaUnitTests()
             }
         }
