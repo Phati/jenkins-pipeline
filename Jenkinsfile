@@ -36,7 +36,7 @@ pipeline{
                 sh ./jenkins/test/mvn.sh mvn test
                 fi
                 '''
-                LoadEnv()
+                loadEnv()
             }
         }
         
