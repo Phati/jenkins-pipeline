@@ -3,7 +3,7 @@ pipeline{
     agent any
 
     environment {
-        PASS = credentials('registry-pass') 
+        DOCKER_HUB_PASSWORD = credentials('registry-pass') 
     }
     
     stages{
