@@ -28,7 +28,6 @@ pipeline{
 
          stage('Unit Tests'){
              steps{
-                LoadEnv()
                 sh '''
                 echo UNIT TESTING STAGE
                 echo SKIP_TESTS = ${SKIP_TESTS}
@@ -37,6 +36,7 @@ pipeline{
                 sh ./jenkins/test/mvn.sh mvn test
                 fi
                 '''
+                LoadEnv()
             }
         }
         
