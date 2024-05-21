@@ -21,7 +21,7 @@ pipeline{
             steps{
                 sh '''
                 echo BUILD STAGE
-                chmod +x -R `${env.WORKSPACE}`/jenkins/build/mvn.sh
+                chmod +x -R ${WORKSPACE}/jenkins/build/mvn.sh
                 ./jenkins/build/mvn.sh mvn clean compile install -DskipTests
                 '''
             }
@@ -31,7 +31,7 @@ pipeline{
              steps{
                 sh '''
                 echo TEST STAGE
-                chmod +x -R ${env.WORKSPACE}/jenkins/test/mvn.sh
+                chmod +x -R ${WORKSPACE}/jenkins/test/mvn.sh
                 sh ./jenkins/test/mvn.sh mvn test
                 '''
             }
@@ -41,7 +41,7 @@ pipeline{
             steps{
                 sh '''
                 echo CONTAINERIZE STAGE
-                chmod +x -R ${env.WORKSPACE}/jenkins/build/build.sh
+                chmod +x -R ${WORKSPACE}/jenkins/build/build.sh
                 ./jenkins/build/build.sh
                 '''
             }
@@ -51,7 +51,7 @@ pipeline{
              steps{
                 sh '''
                 echo PUSH STAGE
-                chmod +x -R ${env.WORKSPACE}/jenkins/push/push.sh
+                chmod +x -R ${WORKSPACE}/jenkins/push/push.sh
                 sh './jenkins/push/push.sh
                 '''
             }
