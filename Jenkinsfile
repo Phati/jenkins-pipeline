@@ -6,15 +6,15 @@ pipeline{
         stage('Build'){
             steps{
                 sh 'echo BUILD STAGE'
-                ./jenkins/build/mvn.sh mvn clean compile install -DskipTests
-                ./jenkins/build/build.sh
+                sh './jenkins/build/mvn.sh mvn clean compile install -DskipTests'
+                sh './jenkins/build/build.sh'
             }
         }
 
         stage('Test'){
              steps{
                 sh 'echo TEST STAGE'
-                ./jenkins/test/mvn.sh mvn test
+                sh './jenkins/test/mvn.sh mvn test'
             }
         }
 
