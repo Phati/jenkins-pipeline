@@ -11,27 +11,24 @@ pipeline{
 
         stage('Pipeline Setup') {
             steps {
-               loadEnv()
+                sh "echo ****************PIPELINE SETUP STAGE****************
+                loadEnv()
             }
         }
 
          stage('Unit Tests'){
              steps{
-                sh '''
-                echo UNIT TESTING STAGE
-                echo SKIP_TESTS = ${SKIP_TESTS}
-                if !($SKIP_TESTS); then
-                chmod +x -R ${WORKSPACE}/jenkins/test/mvn.sh
-                sh ./jenkins/test/mvn.sh mvn test
-                fi
-                '''
+                 sh '''
+                    echo ****************UNIT TESTING STAGE****************
+                 '''
+                 runJavaUnitTests()
             }
         }
         
         stage('Build'){
             steps{
                 sh '''
-                echo BUILD STAGE
+                echo ****************BUILD STAGE****************
                 echo RELEASE_VERSION = ${RELEASE_VERSION}
                 echo COMPILE_AGRS = ${COMPILE_ARGS}
                 chmod +x -R ${WORKSPACE}/jenkins/build/mvn.sh
@@ -43,7 +40,7 @@ pipeline{
         stage('Containerize'){
             steps{
                 sh '''
-                echo CONTAINERIZE STAGE
+                echo ****************CONTAINERIZE STAGE****************
                 chmod +x -R ${WORKSPACE}/jenkins/build/build.sh
                 ./jenkins/build/build.sh
                 '''
@@ -53,7 +50,7 @@ pipeline{
         stage('Push'){
              steps{
                 sh '''
-                echo PUSH STAGE
+                echo ****************PUSH STAGE****************
                 chmod +x -R ${WORKSPACE}/jenkins/push/push.sh
                 ./jenkins/push/push.sh
                 '''
@@ -62,7 +59,7 @@ pipeline{
 
         stage('Deploy'){
              steps{
-                sh 'echo Deploy'
+                sh 'echo ****************DEPLOY STAGE****************'
             }
         }
     }
