@@ -9,25 +9,26 @@ pipeline{
     
     stages{
 
-        stage('Read .env file') {
-            steps {
-                script {
-                    def envFilePath = "${WORKSPACE}/.env"
-                    if (fileExists(envFilePath)) {
-                        def envContent = readFile(envFilePath).trim()
-                        envContent.readLines().each { line ->
-                            def (key, value) = line.split('=')
-                            env."${key}" = value
-                        }
-                    } else {
-                        echo "No .env file found"
-                    }
-                }
-            }
-        }
+        // stage('Read .env file') {
+        //     steps {
+        //         script {
+        //             def envFilePath = "${WORKSPACE}/.env"
+        //             if (fileExists(envFilePath)) {
+        //                 def envContent = readFile(envFilePath).trim()
+        //                 envContent.readLines().each { line ->
+        //                     def (key, value) = line.split('=')
+        //                     env."${key}" = value
+        //                 }
+        //             } else {
+        //                 echo "No .env file found"
+        //             }
+        //         }
+        //     }
+        // }
 
          stage('Unit Tests'){
              steps{
+                loadEnv()
                 sh '''
                 echo UNIT TESTING STAGE
                 echo SKIP_TESTS = ${SKIP_TESTS}
@@ -36,7 +37,6 @@ pipeline{
                 sh ./jenkins/test/mvn.sh mvn test
                 fi
                 '''
-                loadEnv()
             }
         }
         
