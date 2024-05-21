@@ -12,7 +12,7 @@ echo "** Logging in ***"
 docker login -u phatijava -p $PASS
 
 echo "*** Tagging image ***"
-docker tag $IMAGE:$BUILD_TAG phatijava/$IMAGE:$BUILD_TAG
+docker tag $IMAGE:$RELEASE_VERSION phatijava/$IMAGE:$RELEASE_VERSION
 
 echo "*** Pushing image ***"
-docker push phatijava/$IMAGE:$BUILD_TAG
+docker push phatijava/$IMAGE:$RELEASE_VERSION
