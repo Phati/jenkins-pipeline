@@ -19,41 +19,41 @@ pipeline{
         
         stage('Build'){
             steps{
-                sh '''
+                sh "
                 echo BUILD STAGE
                 chmod +x -R ${env.WORKSPACE}/jenkins/build/mvn.sh
                 ./jenkins/build/mvn.sh mvn clean compile install -DskipTests
-                '''
+                "
             }
         }
 
          stage('Test'){
              steps{
-                sh '''
+                sh "
                 echo TEST STAGE
                 chmod +x -R ${env.WORKSPACE}/jenkins/test/mvn.sh
                 sh ./jenkins/test/mvn.sh mvn test
-                '''
+                "
             }
         }
 
         stage('Containerize'){
             steps{
-                sh '''
+                sh "
                 echo CONTAINERIZE STAGE
                 chmod +x -R ${env.WORKSPACE}/jenkins/build/build.sh
                 ./jenkins/build/build.sh
-                '''
+                "
             }
         }
 
         stage('Push'){
              steps{
-                sh '''
+                sh "
                 echo PUSH STAGE
                 chmod +x -R ${env.WORKSPACE}/jenkins/push/push.sh
                 sh './jenkins/push/push.sh
-                '''
+                "
             }
         }
 
