@@ -9,7 +9,7 @@ IMAGE="spring-boot-app"
 
 
 echo "** Logging in ***"
-docker login -u phatijava -p $PASS
+docker login -u phatijava -p $DOCKER_HUB_PASSWORD
 
 echo "*** Tagging image ***"
 docker tag $IMAGE:$RELEASE_VERSION phatijava/$IMAGE:$RELEASE_VERSION
