@@ -19,11 +19,11 @@ pipeline{
         
         stage('Build'){
             steps{
-                sh "
+                sh '''
                 echo BUILD STAGE
-                chmod +x -R ${env.WORKSPACE}/jenkins/build/mvn.sh
+                chmod +x -R `${env.WORKSPACE}`/jenkins/build/mvn.sh
                 ./jenkins/build/mvn.sh mvn clean compile install -DskipTests
-                "
+                '''
             }
         }
 
