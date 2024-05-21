@@ -10,6 +10,9 @@ pipeline{
         stage('Build'){
             steps{
                 sh 'echo BUILD STAGE'
+                def pom = readMavenPom file: 'pom.xml'
+                env.RELEASE_VERSION = pom.version
+                sh "echo VERSION IS ${RELEASE_VERSION}"
                 sh 'whoami'
                 //sh " password- ${PASS}"
                 //sh "sudo chown -R jenkins:jenkins ${env.WORKSPACE}"
