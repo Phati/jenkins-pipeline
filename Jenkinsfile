@@ -24,33 +24,28 @@ pipeline{
                 }
             }
         }
-        
-        // stage('Read POM Version') {
-        //     steps {
-        //        script {
-        //            def pom = readMavenPom file: 'pom.xml'
-        //            env.RELEASE_VERSION = pom.version  
-        //        }
-        //     }
-        // }
+
+         stage('Unit Tests'){
+             steps{
+                sh '''
+                echo UNIT TESTING STAGE
+                echo SKIP_TESTS = ${SKIP_TESTS}
+                if[ !$SKIP_TESTS ]; then
+                chmod +x -R ${WORKSPACE}/jenkins/test/mvn.sh
+                sh ./jenkins/test/mvn.sh mvn test
+                fi
+                '''
+            }
+        }
         
         stage('Build'){
             steps{
                 sh '''
                 echo BUILD STAGE
                 echo RELEASE_VERSION = ${RELEASE_VERSION}
+                echo COMPILE_AGRS = ${COMPILE_ARGS}
                 chmod +x -R ${WORKSPACE}/jenkins/build/mvn.sh
-                ./jenkins/build/mvn.sh mvn clean compile install -DskipTests
-                '''
-            }
-        }
-
-         stage('Test'){
-             steps{
-                sh '''
-                echo TEST STAGE
-                chmod +x -R ${WORKSPACE}/jenkins/test/mvn.sh
-                sh ./jenkins/test/mvn.sh mvn test
+                ./jenkins/build/mvn.sh mvn ${COMPILE_ARGS}
                 '''
             }
         }
