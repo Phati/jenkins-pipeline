@@ -1,4 +1,4 @@
-@Library('java_shared_library') _
+// @Library('java_shared_library') _
 pipeline{
     
     agent any
@@ -9,22 +9,22 @@ pipeline{
     
     stages{
 
-        // stage('Read .env file') {
-        //     steps {
-        //         script {
-        //             def envFilePath = "${WORKSPACE}/.env"
-        //             if (fileExists(envFilePath)) {
-        //                 def envContent = readFile(envFilePath).trim()
-        //                 envContent.readLines().each { line ->
-        //                     def (key, value) = line.split('=')
-        //                     env."${key}" = value
-        //                 }
-        //             } else {
-        //                 echo "No .env file found"
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Read .env file') {
+            steps {
+                script {
+                    def envFilePath = "${WORKSPACE}/.env"
+                    if (fileExists(envFilePath)) {
+                        def envContent = readFile(envFilePath).trim()
+                        envContent.readLines().each { line ->
+                            def (key, value) = line.split('=')
+                            env."${key}" = value
+                        }
+                    } else {
+                        echo "No .env file found"
+                    }
+                }
+            }
+        }
 
          stage('Unit Tests'){
              steps{
