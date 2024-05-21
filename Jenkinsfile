@@ -7,11 +7,21 @@ pipeline{
     }
     
     stages{
+
+        stage('Read POM Version') {
+            steps {
+               script {
+                   def pom = readMavenPom file: 'pom.xml'
+                   env.RELEASE_VERSION = pom.version
+                   
+               }
+            }
+        }
+    
+        
         stage('Build'){
             steps{
                 sh 'echo BUILD STAGE'
-                def pom = readMavenPom file: 'pom.xml'
-                env.RELEASE_VERSION = pom.version
                 sh "echo VERSION IS ${RELEASE_VERSION}"
                 sh 'whoami'
                 //sh " password- ${PASS}"
