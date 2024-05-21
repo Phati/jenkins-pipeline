@@ -7,6 +7,23 @@ pipeline{
     }
     
     stages{
+
+        stage('Read .env file') {
+            steps {
+                script {
+                    def envFilePath = "${WORKSPACE}/.env"
+                    if (fileExists(envFilePath)) {
+                        def envContent = readFile(envFilePath).trim()
+                        envContent.readLines().each { line ->
+                            def (key, value) = line.split('=')
+                            env."${key}" = value
+                        }
+                    } else {
+                        echo "No .env file found"
+                    }
+                }
+            }
+        }
         
         // stage('Read POM Version') {
         //     steps {
@@ -21,6 +38,7 @@ pipeline{
             steps{
                 sh '''
                 echo BUILD STAGE
+                echo RELEASE_VERSION = ${RELEASE_VERSION}
                 chmod +x -R ${WORKSPACE}/jenkins/build/mvn.sh
                 ./jenkins/build/mvn.sh mvn clean compile install -DskipTests
                 '''
