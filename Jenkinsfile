@@ -6,7 +6,7 @@ pipeline{
         stage('Build'){
             steps{
                 sh 'echo BUILD STAGE'
-                sh 'chmod +x -R ${env.WORKSPACE}'
+                sh "chmod +x -R ${env.WORKSPACE}"
                 sh './jenkins/build/mvn.sh mvn clean compile install -DskipTests'
                 sh './jenkins/build/build.sh'
             }
