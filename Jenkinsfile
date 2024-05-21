@@ -13,10 +13,10 @@ pipeline{
                 sh 'whoami'
                 //sh " password- ${PASS}"
                 //sh "sudo chown -R jenkins:jenkins ${env.WORKSPACE}"
-                sh "chmod +x -R ${env.WORKSPACE}/spring-boot-app/jenkins/build/build.sh"
-                sh "chmod +x -R ${env.WORKSPACE}/spring-boot-app/jenkins/build/mvn.sh"
-                sh "chmod +x -R ${env.WORKSPACE}/spring-boot-app/jenkins/test/mvn.sh"
-                sh "chmod +x -R ${env.WORKSPACE}/spring-boot-app/jenkins/push/push.sh"
+                sh "chmod +x -R ${env.WORKSPACE}/jenkins/build/build.sh"
+                sh "chmod +x -R ${env.WORKSPACE}/jenkins/build/mvn.sh"
+                sh "chmod +x -R ${env.WORKSPACE}/jenkins/test/mvn.sh"
+                sh "chmod +x -R ${env.WORKSPACE}/jenkins/push/push.sh"
                 sh './jenkins/build/mvn.sh mvn clean compile install -DskipTests'
                 sh './jenkins/build/build.sh'
             }
