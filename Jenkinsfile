@@ -52,7 +52,7 @@ pipeline{
                 sh '''
                 echo PUSH STAGE
                 chmod +x -R ${WORKSPACE}/jenkins/push/push.sh
-                sh './jenkins/push/push.sh
+                ./jenkins/push/push.sh
                 '''
             }
         }
