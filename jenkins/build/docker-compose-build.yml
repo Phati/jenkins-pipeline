@@ -1,7 +1,7 @@
 version: '3'
 services:
   app:
-    image: "spring-boot-app:$RELEASE_VERSION"
+    image: "$IMAGE:$RELEASE_VERSION"
     build:
       context: .
       dockerfile: Dockerfile-Java
