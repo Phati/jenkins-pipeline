@@ -4,10 +4,6 @@ echo "********************"
 echo "** Pushing image ***"
 echo "********************"
 
-
-IMAGE="spring-boot-app"
-
-
 echo "** Logging in ***"
 docker login -u phatijava -p $DOCKER_HUB_PASSWORD
 
